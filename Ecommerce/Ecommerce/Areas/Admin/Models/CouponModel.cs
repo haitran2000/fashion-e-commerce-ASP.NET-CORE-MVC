@@ -7,7 +7,6 @@ namespace Ecommerce.Areas.Admin.Models
 {
     public class CouponModel
     {
-        [Key]
         public int CouponID { get; set; }
         public string CouponName { get; set; }
         public string CouponCode { get; set; }

@@ -7,12 +7,12 @@ namespace Ecommerce.Areas.Admin.Models
 {
     public class CategoryModel
     {
-        [Key]
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
         public string CategoryKeyWord { get; set; }
         public string CategoryPicture { get; set; }
         public int CategoryStatus { get; set; }
+        public List<ProductModel> Products { set; get; }
     }
 }

@@ -7,7 +7,6 @@ namespace Ecommerce.Areas.Admin.Models
 {
     public class SuppliersModel
     {
-        [Key]
         public int SupplierID { get; set; }
         public string SupplierName { get; set; }
         public long SupplierAdress { get; set; }
@@ -15,5 +14,6 @@ namespace Ecommerce.Areas.Admin.Models
         public string SupplierNotes { get; set; }
         public int SupplierLogo { get; set; }
         public int SupplierStatus { get; set; }
+        public List<ProductModel> Products { set; get; }
     }
 }

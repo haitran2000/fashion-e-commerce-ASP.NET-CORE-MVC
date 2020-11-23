@@ -1,0 +1,59 @@
+﻿@model Ecommerce.Areas.Admin.Models.SuppliersModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>SuppliersModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SupplierID" />
+            <div class="form-group">
+                <label asp-for="SupplierName" class="control-label"></label>
+                <input asp-for="SupplierName" class="form-control" />
+                <span asp-validation-for="SupplierName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierAdress" class="control-label"></label>
+                <input asp-for="SupplierAdress" class="form-control" />
+                <span asp-validation-for="SupplierAdress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierPhone" class="control-label"></label>
+                <input asp-for="SupplierPhone" class="form-control" />
+                <span asp-validation-for="SupplierPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierNotes" class="control-label"></label>
+                <input asp-for="SupplierNotes" class="form-control" />
+                <span asp-validation-for="SupplierNotes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierLogo" class="control-label"></label>
+                <input asp-for="SupplierLogo" class="form-control" />
+                <span asp-validation-for="SupplierLogo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierStatus" class="control-label"></label>
+                <input asp-for="SupplierStatus" class="form-control" />
+                <span asp-validation-for="SupplierStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

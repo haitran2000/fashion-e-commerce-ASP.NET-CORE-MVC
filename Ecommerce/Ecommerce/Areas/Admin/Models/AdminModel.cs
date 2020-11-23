@@ -8,7 +8,6 @@ namespace Ecommerce.Areas.Admin.Models
 {
     public class AdminModel
     {
-        [Key]
         public int AdminID { get; set; }
         public string AdminEmail { get; set; }
         public string AdminPicture { get; set; }

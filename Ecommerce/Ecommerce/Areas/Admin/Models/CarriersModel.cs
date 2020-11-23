@@ -8,9 +8,9 @@ namespace Ecommerce.Areas.Admin.Models
 {
     public class CarriersModel
     {
-        [Key]
         public int CarrierID { get; set; }
         public long CarrierName { get; set; }
         public string CarrierStatus { get; set; }
+        public List<OrdersModel> Orders { set; get; }
     }
 }
