@@ -11,6 +11,15 @@
           "lib/netstandard2.0/Humanizer.dll": {}
         }
       },
+      "Microsoft.AspNet.Razor/3.2.7": {
+        "type": "package",
+        "compile": {
+          "lib/net45/System.Web.Razor.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Razor.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -2795,6 +2804,19 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Microsoft.AspNet.Razor/3.2.7": {
+      "sha512": "BpWEZ+Ys7g9VAkbAfpG5jr5A1fKcmadCCXv3fYfps5YfTVABJIGV4uc9yvmXKxsNsjL+BzDld2gs+xtgT2gg1g==",
+      "type": "package",
+      "path": "microsoft.aspnet.razor/3.2.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/System.Web.Razor.dll",
+        "lib/net45/System.Web.Razor.xml",
+        "microsoft.aspnet.razor.3.2.7.nupkg.sha512",
+        "microsoft.aspnet.razor.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -8939,6 +8961,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.AspNet.Razor >= 3.2.7",
       "Microsoft.EntityFrameworkCore >= 5.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.10",
@@ -8983,6 +9006,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Microsoft.AspNet.Razor": {
+            "target": "Package",
+            "version": "[3.2.7, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.0, )"
@@ -9027,5 +9054,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Razor 3.2.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Razor",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

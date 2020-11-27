@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
@@ -16,7 +17,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\image\" />
+    <Folder Include="wwwroot\image\brand\" />
+    <Folder Include="wwwroot\image\supplier\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_Layout.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

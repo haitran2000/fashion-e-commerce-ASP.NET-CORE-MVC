@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ecommerce.Areas.Admin.Data;
 using Ecommerce.Areas.Admin.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Ecommerce.Areas.Admin.Controllers
 {
@@ -55,10 +57,17 @@ namespace Ecommerce.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BrandID,BrandName,BrandPicture,BrandDescription,BrandStatus")] BrandModel brandModel)
+        public async Task<IActionResult> Create([Bind("BrandID,BrandName,BrandPicture,BrandDescription,BrandStatus")] BrandModel brandModel, IFormFile ful)
         {
+
             if (ModelState.IsValid)
             {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/brand", brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ful.CopyToAsync(stream);
+                }
+                brandModel.BrandPicture = brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                 _context.Add(brandModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

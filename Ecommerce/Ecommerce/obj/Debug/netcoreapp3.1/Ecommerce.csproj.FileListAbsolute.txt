@@ -146,8 +146,6 @@ C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\bin\Debug\netcoreapp3.1\runtimes\
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.AssemblyInfoInputs.cache
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.AssemblyInfo.cs
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.csproj.CoreCompileInputs.cache
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.RazorAssemblyInfo.cache
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.RazorAssemblyInfo.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.TagHelpers.input.cache
@@ -218,7 +216,6 @@ C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Are
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewStart.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -234,3 +231,9 @@ C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.pdb
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.genruntimeconfig.cache
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.csprojAssemblyReference.cache
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_FooterPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_HeaderPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_HeadPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.csproj.CoreCompileInputs.cache
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\bin\Debug\netcoreapp3.1\System.Web.Razor.dll
