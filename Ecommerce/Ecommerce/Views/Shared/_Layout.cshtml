@@ -1,28 +1,37 @@
 ﻿<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    @await Html.PartialAsync("_HeadPartial.cshtml")
-    @RenderSection("css", required: false)
-</head>
-<body data-sidebar="dark">
-    @await Html.PartialAsync("_HeaderPartial.cshtml")
-    <!-- ========== Left Sidebar Start ========== -->
+<html class="no-js" lang="zxx">
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        @await Html.PartialAsync("_HeadPartial.cshtml")
+        @RenderSection("css", required: false)
+    </head>
+    <body>
+        <!-- Add your site or application content here -->
+        <!--pos page start-->
+        <div class="pos_page">
+            <div class="container">
+                <!--pos page inner-->
+                <div class="pos_page_inner">
+                    <!--header area -->
+                    @await Html.PartialAsync("_Header_Area_Partial.cshtml")
+                    <!-- ========== Left Sidebar Start ========== -->
 
-    <div>
-        @RenderBody()
-    </div>
-    <script src="~/user/assets/js/vendor/jquery-1.12.0.min.js"></script>
-    <script src="~/user/assets/js/popper.js"></script>
-    <script src="~/user/assets/js/bootstrap.min.js"></script>
-    <script src="~/user/assets/js/ajax-mail.js"></script>
-    <script src="~/user/assets/js/plugins.js"></script>
-    <script src="~/user/assets/js/main.js"></script>
-    @RenderSection("Scripts", required: false)
-    @await Html.PartialAsync("_FooterPartial.cshtml")
-</body>
+                    @RenderBody()
+
+                </div>
+            </div>
+        </div>
+        @await Html.PartialAsync("_FooterPartial.cshtml")
+        @await Html.PartialAsync("Breadcrumbs_Area_Partial.cshtml")
+        <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: inline;"><i class="fa fa-angle-double-up"></i></a>
+        <script src="~/user/assets/js/vendor/jquery-1.12.0.min.js"></script>
+        <script src="~/user/assets/js/popper.js"></script>
+        <script src="~/user/assets/js/bootstrap.min.js"></script>
+        <script src="~/user/assets/js/ajax-mail.js"></script>
+        <script src="~/user/assets/js/plugins.js"></script>
+    </body>
 </html>

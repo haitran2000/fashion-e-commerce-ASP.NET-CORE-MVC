@@ -52,8 +52,8 @@ namespace Ecommerce.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("BrandDescription")
-                        .HasColumnType("int");
+                    b.Property<string>("BrandDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BrandName")
                         .HasColumnType("nvarchar(max)");
@@ -76,11 +76,11 @@ namespace Ecommerce.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<long>("CarrierName")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("CarrierStatus")
+                    b.Property<string>("CarrierName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CarrierStatus")
+                        .HasColumnType("int");
 
                     b.HasKey("CarrierID");
 
