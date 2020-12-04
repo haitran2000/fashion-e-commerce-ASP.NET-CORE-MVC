@@ -57,6 +57,9 @@
                                             </th>
                                             <th> @Html.DisplayNameFor(model => model.ProductName)</th>
                                             <th>
+                                                @Html.DisplayNameFor(model => model.ProductNumber)
+                                            </th>
+                                            <th>
                                                 @Html.DisplayNameFor(model => model.ProductDescription)
                                             </th>
                                             <th>
@@ -64,15 +67,6 @@
                                             </th>
                                             <th>
                                                 @Html.DisplayNameFor(model => model.ProductPrice)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.ProductBrandID)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.ProductSupplierID)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.ProductCategoryID)
                                             </th>
                                             <th>View Details</th>
                                             <th>Action</th>
@@ -90,6 +84,9 @@
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
                                             <td>
+                                                @Html.DisplayFor(modelItem => item.ProductNumber)
+                                            </td>
+                                            <td>
                                                 @Html.DisplayFor(modelItem => item.ProductDescription)
                                             </td>
                                             <td>
@@ -97,15 +94,6 @@
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.ProductPrice)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ProductBrandID)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ProductSupplierID)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.ProductCategoryID)
                                             </td>
                                             <td>
                                                 <!-- Button trigger modal -->

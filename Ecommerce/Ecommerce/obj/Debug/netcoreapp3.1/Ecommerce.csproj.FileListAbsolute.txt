@@ -225,13 +225,8 @@ C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Are
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewStart.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BannerOnePartial.cshtml.g.cs
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BannerTowPartial.cshtml.g.cs
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BlogPartial.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BrandPartial.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_NewProductPartial.cshtml.g.cs
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_NewProductTwoPartial.cshtml.g.cs
-C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Breadcrumbs_Area_Partial.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_FooterPartial.cshtml.g.cs
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Header_Area_Partial.cshtml.g.cs
@@ -249,3 +244,13 @@ C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\staticweb
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.dll
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.pdb
 C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Ecommerce.genruntimeconfig.cache
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ModalPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BannerLeftBottomPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BannerLeftPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BannerRight.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_CategoryPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_NewsLetterPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_SliderPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_WishlistPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_FeaturedProductPartial.cshtml.g.cs
+C:\Users\H\Desktop\ASP.NET\Ecommerce\Ecommerce\obj\Debug\netcoreapp3.1\Razor\Views\Home\_BannerRightBottom.cshtml.g.cs

@@ -1,19 +1,68 @@
-﻿<div class="pos_home_section">
-    @await Html.PartialAsync("_BannerOnePartial.cshtml")
-    <!--banner slider start-->
-    <!--new product area start-->
-    @await Html.PartialAsync("_NewProductPartial.cshtml")
-    @await Html.PartialAsync("_BannerTowPartial.cshtml")
-    <!--new product area start-->
-    <!--banner area start-->
-    <!--banner area end-->
-    <!--featured product area start-->
-    @await Html.PartialAsync("_NewProductTwoPartial.cshtml")
-    <!--featured product area start-->
-    <!--blog area start-->
-    @await Html.PartialAsync("_BlogPartial.cshtml")
-    <!--blog area end-->
-    <!--brand logo strat-->
-    @await Html.PartialAsync("_BrandPartial.cshtml")
-    <!--brand logo end-->
+﻿<div class=" pos_home_section">
+    <div class="row pos_home">
+        <div class="col-lg-3 col-md-8 col-12">
+            <!--sidebar banner-->
+            @await Html.PartialAsync("_BannerLeftPartial.cshtml")
+            <!--sidebar banner end-->
+            <!--categorie menu start-->
+            @await Html.PartialAsync("_CategoryPartial.cshtml")
+            <!--categorie menu end-->
+            <!--wishlist block start-->
+            @await Html.PartialAsync("_WishlistPartial.cshtml")
+            <!--wishlist block end-->
+            <!--popular tags area-->
+            <div class="sidebar_widget tags mb-35">
+                <div class="block_title">
+                    <h3>popular tags</h3>
+                </div>
+                <div class="block_tags">
+                    <a href="#">ipod</a>
+                    <a href="#">sam sung</a>
+                    <a href="#">apple</a>
+                    <a href="#">iphone 5s</a>
+                    <a href="#">superdrive</a>
+                    <a href="#">shuffle</a>
+                    <a href="#">nano</a>
+                    <a href="#">iphone 4s</a>
+                    <a href="#">canon</a>
+                </div>
+            </div>
+            <!--popular tags end-->
+            <!--newsletter block start-->
+            <div class="sidebar_widget newsletter mb-35">
+                <div class="block_title">
+                    <h3>newsletter</h3>
+                </div>
+                <form action="#">
+                    <p>Sign up for your newsletter</p>
+                    <input placeholder="Your email address" type="text">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <!--newsletter block end-->
+            <!--sidebar banner-->
+            @await Html.PartialAsync("_BannerLeftBottomPartial.cshtml")
+            <!--sidebar banner end-->
+
+
+
+        </div>
+        <div class="col-lg-9 col-md-12">
+            <!--banner slider start-->
+            @await Html.PartialAsync("_BannerRight.cshtml")
+            <!--banner slider start-->
+            <!--new product area start-->
+            @await Html.PartialAsync("_NewProductPartial.cshtml")
+            <!--new product area start-->
+            <!--featured product start-->
+            @await Html.PartialAsync("_FeaturedProductPartial.cshtml")
+            <!--featured product end-->
+            <!--banner area start-->
+            @await Html.PartialAsync("_BannerRightBottom.cshtml")
+            <!--banner area end-->
+            <!--brand logo strat-->
+            @await Html.PartialAsync("_BrandPartial.cshtml")
+            <!--brand logo end-->
+        </div>
+    </div>
 </div>

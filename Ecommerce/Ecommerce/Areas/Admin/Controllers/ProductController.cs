@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ecommerce.Areas.Admin.Data;
 using Ecommerce.Areas.Admin.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Ecommerce.Areas.Admin.Controllers
 {
@@ -62,10 +64,28 @@ namespace Ecommerce.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,ProductName,ProductDescription,ProductPicture1,ProductPicture2,ProductPicture3,ProductNumber,ProductPrice,ProductDiscount,ProductSupplierID,ProductBrandID,ProductCategoryID,ProductStatus")] ProductModel productModel)
+        public async Task<IActionResult> Create([Bind("ProductID,ProductName,ProductDescription,ProductPicture1,ProductPicture2,ProductPicture3,ProductNumber,ProductPrice,ProductDiscount,ProductSupplierID,ProductBrandID,ProductCategoryID,ProductStatus")] ProductModel productModel, IFormFile ful1, IFormFile ful2, IFormFile ful3)
         {
             if (ModelState.IsValid)
             {
+                var path1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/product/1", productModel.ProductPicture1 + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1]);
+                var path2 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/product/2", productModel.ProductPicture2 + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1]);
+                var path3 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/product/3", productModel.ProductPicture3 + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path1, FileMode.Create))
+                {
+                    await ful1.CopyToAsync(stream);
+                }
+                using (var stream = new FileStream(path2, FileMode.Create))
+                {
+                    await ful1.CopyToAsync(stream);
+                }
+                using (var stream = new FileStream(path3, FileMode.Create))
+                {
+                    await ful1.CopyToAsync(stream);
+                }
+                productModel.ProductPicture1 = productModel.ProductPicture1 + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1];
+                productModel.ProductPicture2 = productModel.ProductPicture2 + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1];
+                productModel.ProductPicture3 = productModel.ProductPicture3 + "." + ful1.FileName.Split(".")[ful1.FileName.Split(".").Length - 1];
                 _context.Add(productModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

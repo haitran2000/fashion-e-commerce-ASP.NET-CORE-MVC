@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Admin\**" />
+    <Compile Remove="wwwroot\image\supplier\**" />
+    <Content Remove="wwwroot\Admin\**" />
+    <Content Remove="wwwroot\image\supplier\**" />
+    <EmbeddedResource Remove="wwwroot\Admin\**" />
+    <EmbeddedResource Remove="wwwroot\image\supplier\**" />
+    <None Remove="wwwroot\Admin\**" />
+    <None Remove="wwwroot\image\supplier\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
@@ -19,8 +30,9 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\image\brand\" />
-    <Folder Include="wwwroot\image\supplier\" />
-    <Folder Include="wwwroot\Admin\" />
+    <Folder Include="wwwroot\image\product\1\" />
+    <Folder Include="wwwroot\image\product\2\" />
+    <Folder Include="wwwroot\image\product\3\" />
   </ItemGroup>
 
   <ItemGroup>
