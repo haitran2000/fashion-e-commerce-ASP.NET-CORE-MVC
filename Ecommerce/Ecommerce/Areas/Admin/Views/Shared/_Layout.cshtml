@@ -6,6 +6,7 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
     @await Html.PartialAsync("_HeadPartial.cshtml")
     @RenderSection("css", required: false)
 </head>
@@ -15,23 +16,40 @@
         @await Html.PartialAsync("_HeaderPartial.cshtml")
         <!-- ========== Left Sidebar Start ========== -->
         @await Html.PartialAsync("_MenuPartial.cshtml")
-        <div>
-            @RenderBody()
-        </div>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
+        @RenderBody()
+
     </div>
+    <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
     <!-- JAVASCRIPT -->
     <script src="~/assets/libs/jquery/jquery.min.js"></script>
     <script src="~/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/libs/metismenu/metisMenu.min.js"></script>
     <script src="~/assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="~/assets/libs/node-waves/waves.min.js"></script>
-    <!-- apexcharts -->
-    <script src="~/assets/libs/apexcharts/apexcharts.min.js"></script>
-
     <script src="~/assets/js/pages/dashboard.init.js"></script>
 
     <!-- App js -->

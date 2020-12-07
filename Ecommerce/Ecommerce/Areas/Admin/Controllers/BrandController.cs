@@ -9,6 +9,7 @@ using Ecommerce.Areas.Admin.Data;
 using Ecommerce.Areas.Admin.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using static Ecommerce.Helper; 
 
 namespace Ecommerce.Areas.Admin.Controllers
 {
@@ -46,10 +47,23 @@ namespace Ecommerce.Areas.Admin.Controllers
             return View(brandModel);
         }
 
-        // GET: Admin/Brand/Create
-        public IActionResult Create()
+        // GET: Admin/Brand/AddOrDeit
+        [NoDirectAccess]
+        public async Task<IActionResult> AddOrEdit(int id = 0)
         {
-            return View();
+            if (id == 0)
+            {
+                return View(new BrandModel());
+            }
+            else
+            {
+                var brandModel = await _context.Brand.FindAsync(id);
+                if (brandModel == null)
+                {
+                    return NotFound();
+                }
+                return View(brandModel);
+            }    
         }
 
         // POST: Admin/Brand/Create
@@ -57,76 +71,44 @@ namespace Ecommerce.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BrandID,BrandName,BrandPicture,BrandDescription,BrandStatus")] BrandModel brandModel, IFormFile ful)
+        public async Task<IActionResult> AddOrEdit(int id,[Bind("BrandID,BrandName,BrandPicture,BrandDescription,BrandStatus")] BrandModel brandModel, IFormFile ful)
         {
 
             if (ModelState.IsValid)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/brand", brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
-                using (var stream = new FileStream(path, FileMode.Create))
+                if (id == 0)
                 {
-                    await ful.CopyToAsync(stream);
-                }
-                brandModel.BrandPicture = brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
-                _context.Add(brandModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(brandModel);
-        }
-
-        // GET: Admin/Brand/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var brandModel = await _context.Brand.FindAsync(id);
-            if (brandModel == null)
-            {
-                return NotFound();
-            }
-            return View(brandModel);
-        }
-
-        // POST: Admin/Brand/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BrandID,BrandName,BrandPicture,BrandDescription,BrandStatus")] BrandModel brandModel)
-        {
-            if (id != brandModel.BrandID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(brandModel);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/brand", brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    brandModel.BrandPicture = brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                    _context.Add(brandModel);
                     await _context.SaveChangesAsync();
+
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!BrandModelExists(brandModel.BrandID))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(brandModel);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!BrandModelExists(brandModel.BrandID))
+                        { return NotFound(); }
+                        else
+                        { throw; }
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAll", _context.Brand.ToList()) });
             }
-            return View(brandModel);
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddOrEdit", brandModel) });
         }
 
-        // GET: Admin/Brand/Delete/5
+       
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -152,7 +134,7 @@ namespace Ecommerce.Areas.Admin.Controllers
             var brandModel = await _context.Brand.FindAsync(id);
             _context.Brand.Remove(brandModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { html = Helper.RenderRazorViewToString(this, "_ViewAll", _context.Brand.ToList()) });
         }
 
         private bool BrandModelExists(int id)

@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="text-sm-right">
-                                        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i><a asp-action="Create">Create New</a></button>
+                                        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i><a onclick="showInPopup('@Url.Action("AddOrEdit","Admin",null,Context.Request.Scheme)','New Admin')">Create New</a></button>
                                     </div>
                                 </div><!-- end col-->
                             </div>
@@ -96,8 +96,11 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a asp-action="Edit" asp-route-id="@item.AdminID"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                    <a asp-action="Delete" asp-route-id="@item.AdminID"><i class="mdi mdi-close font-size-18"></i></a>
+                                                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Admin",new {id=item.AdminID},Context.Request.Scheme)','Update Admin')"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                    <form asp-action="Delete" asp-route-id="@item.AdminID" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                                                        <input type="hidden" asp-for="@item.AdminID" />
+                                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                                    </form>
                                                 </td>
                                             </tr>
                                         }
@@ -130,108 +133,21 @@
     </div>
     <!-- End Page-content -->
     <!-- Modal -->
-    <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                    <h5 class="modal-title"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
-                    <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
 
-                    <div class="table-responsive">
-                        <table class="table table-centered table-nowrap">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <div>
-                                            <img src="assets\images\product\img-7.png" alt="" class="avatar-sm">
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div>
-                                            <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                                            <p class="text-muted mb-0">$ 225 x 1</p>
-                                        </div>
-                                    </td>
-                                    <td>$ 255</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div>
-                                            <img src="assets\images\product\img-4.png" alt="" class="avatar-sm">
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div>
-                                            <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
-                                            <p class="text-muted mb-0">$ 145 x 1</p>
-                                        </div>
-                                    </td>
-                                    <td>$ 145</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h6 class="m-0 text-right">Sub Total:</h6>
-                                    </td>
-                                    <td>
-                                        $ 400
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h6 class="m-0 text-right">Shipping:</h6>
-                                    </td>
-                                    <td>
-                                        Free
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h6 class="m-0 text-right">Total:</h6>
-                                    </td>
-                                    <td>
-                                        $ 400
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <script>document.write(new Date().getFullYear())</script>2020 © Skote.
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-right d-none d-sm-block">
-                        Design &amp; Develop by Themesbrand
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

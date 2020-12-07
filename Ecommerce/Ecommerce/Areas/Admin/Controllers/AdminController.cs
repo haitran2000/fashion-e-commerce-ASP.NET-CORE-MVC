@@ -9,6 +9,7 @@ using Ecommerce.Areas.Admin.Data;
 using Ecommerce.Areas.Admin.Models;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using static Ecommerce.Helper;
 
 namespace Ecommerce.Areas.Admin.Controllers
 {
@@ -47,9 +48,23 @@ namespace Ecommerce.Areas.Admin.Controllers
         }
 
         // GET: Admin/Admin/Create
-        public IActionResult Create()
+        [NoDirectAccess]
+        public async Task<IActionResult> AddOrEdit(int id = 0)
         {
-            return View();
+            if (id == 0)
+            {
+                return View(new AdminModel());
+            }
+            else
+            {
+                var adminModel = await _context.Admin.FindAsync(id);
+                if (adminModel == null)
+                {
+                    return NotFound();
+                }
+                return View(adminModel);
+            }    
+            
         }
 
         // POST: Admin/Admin/Create
@@ -57,75 +72,47 @@ namespace Ecommerce.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdminID,AdminEmail,AdminPicture,AdminPassword,AdminName,AdminPhone")] AdminModel adminModel, IFormFile ful)
+        public async Task<IActionResult> AddOrEdit(int id, [Bind("AdminID,AdminEmail,AdminPicture,AdminPassword,AdminName,AdminPhone")] AdminModel adminModel, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image", adminModel.AdminID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
-                using (var stream = new FileStream(path, FileMode.Create))
+                if (id == 0)
                 {
-                    await ful.CopyToAsync(stream);
-                }
-                adminModel.AdminPicture = adminModel.AdminID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
-                _context.Add(adminModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(adminModel);
-        }
-
-        // GET: Admin/Admin/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var adminModel = await _context.Admin.FindAsync(id);
-            if (adminModel == null)
-            {
-                return NotFound();
-            }
-            return View(adminModel);
-        }
-
-        // POST: Admin/Admin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdminID,AdminEmail,AdminPicture,AdminPassword,AdminName,AdminPhone")] AdminModel adminModel)
-        {
-            if (id != adminModel.AdminID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(adminModel);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image", adminModel.AdminID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    adminModel.AdminPicture = adminModel.AdminID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                    _context.Add(adminModel);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                else
                 {
-                    if (!AdminModelExists(adminModel.AdminID))
+                    try
                     {
-                        return NotFound();
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image", adminModel.AdminID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await ful.CopyToAsync(stream);
+                        }
+                        adminModel.AdminPicture = adminModel.AdminID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                        _context.Update(adminModel);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!AdminModelExists(adminModel.AdminID))
+                        { return NotFound(); }
+                        else
+                        { throw; }
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "Index", _context.Admin.ToList()) });
             }
-            return View(adminModel);
+            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddOrEdit", adminModel) });
         }
-
-        // GET: Admin/Admin/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,10 +135,10 @@ namespace Ecommerce.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var adminModel = await _context.Admin.FindAsync(id);
-            _context.Admin.Remove(adminModel);
+            var adminModel = await _context.Brand.FindAsync(id);
+            _context.Brand.Remove(adminModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { html = Helper.RenderRazorViewToString(this, "Index", _context.Admin.ToList()) });
         }
 
         private bool AdminModelExists(int id)
