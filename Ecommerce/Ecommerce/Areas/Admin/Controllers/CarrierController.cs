@@ -23,7 +23,7 @@ namespace Ecommerce.Areas.Admin.Controllers
         // GET: Admin/Carrier
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Carrier.ToListAsync());
+            return View(await _context.Carriers.ToListAsync());
         }
 
         // GET: Admin/Carrier/Details/5
@@ -34,14 +34,14 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var carriersModel = await _context.Carrier
+            var carrierModel = await _context.Carriers
                 .FirstOrDefaultAsync(m => m.CarrierID == id);
-            if (carriersModel == null)
+            if (carrierModel == null)
             {
                 return NotFound();
             }
 
-            return View(carriersModel);
+            return View(carrierModel);
         }
 
         // GET: Admin/Carrier/Create
@@ -51,19 +51,19 @@ namespace Ecommerce.Areas.Admin.Controllers
         }
 
         // POST: Admin/Carrier/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarrierID,CarrierName,CarrierStatus")] CarriersModel carriersModel)
+        public async Task<IActionResult> Create([Bind("CarrierID,Name,Status")] CarrierModel carrierModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(carriersModel);
+                _context.Add(carrierModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(carriersModel);
+            return View(carrierModel);
         }
 
         // GET: Admin/Carrier/Edit/5
@@ -74,22 +74,22 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var carriersModel = await _context.Carrier.FindAsync(id);
-            if (carriersModel == null)
+            var carrierModel = await _context.Carriers.FindAsync(id);
+            if (carrierModel == null)
             {
                 return NotFound();
             }
-            return View(carriersModel);
+            return View(carrierModel);
         }
 
         // POST: Admin/Carrier/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarrierID,CarrierName,CarrierStatus")] CarriersModel carriersModel)
+        public async Task<IActionResult> Edit(int id, [Bind("CarrierID,Name,Status")] CarrierModel carrierModel)
         {
-            if (id != carriersModel.CarrierID)
+            if (id != carrierModel.CarrierID)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace Ecommerce.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(carriersModel);
+                    _context.Update(carrierModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CarriersModelExists(carriersModel.CarrierID))
+                    if (!CarrierModelExists(carrierModel.CarrierID))
                     {
                         return NotFound();
                     }
@@ -114,7 +114,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(carriersModel);
+            return View(carrierModel);
         }
 
         // GET: Admin/Carrier/Delete/5
@@ -125,14 +125,14 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var carriersModel = await _context.Carrier
+            var carrierModel = await _context.Carriers
                 .FirstOrDefaultAsync(m => m.CarrierID == id);
-            if (carriersModel == null)
+            if (carrierModel == null)
             {
                 return NotFound();
             }
 
-            return View(carriersModel);
+            return View(carrierModel);
         }
 
         // POST: Admin/Carrier/Delete/5
@@ -140,15 +140,15 @@ namespace Ecommerce.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var carriersModel = await _context.Carrier.FindAsync(id);
-            _context.Carrier.Remove(carriersModel);
+            var carrierModel = await _context.Carriers.FindAsync(id);
+            _context.Carriers.Remove(carrierModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CarriersModelExists(int id)
+        private bool CarrierModelExists(int id)
         {
-            return _context.Carrier.Any(e => e.CarrierID == id);
+            return _context.Carriers.Any(e => e.CarrierID == id);
         }
     }
 }

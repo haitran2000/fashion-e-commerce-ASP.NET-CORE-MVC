@@ -1,72 +1,38 @@
-﻿@model Ecommerce.Areas.Admin.Models.CarriersModel
+﻿@model Ecommerce.Areas.Admin.Models.CarrierModel
 
 @{
     ViewData["Title"] = "Create";
 }
-<div class="main-content">
 
-    <div class="page-content">
-        <div class="container-fluid">
+<h1>Create</h1>
 
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-flex align-items-center justify-content-between">
-                        <h4 class="mb-0 font-size-18">Add Product</h4>
-
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                <li class="breadcrumb-item active">Add Product</li>
-                            </ol>
-                        </div>
-
-                    </div>
-                </div>
+<h4>CarrierModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <!-- end page title -->
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-
-                            <h4 class="card-title">Basic Information</h4>
-                            <p class="card-title-desc">Fill all information below</p>
-
-                            <form data-select2-id="8" asp-action="Create" enctype="multipart/form-data">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label asp-for="CarrierName" class="control-label"></label>
-                                            <input asp-for="CarrierName" class="form-control" />
-                                            <span asp-validation-for="CarrierName" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label asp-for="CarrierStatus" class="control-label"></label>
-                                            <input asp-for="CarrierStatus" class="form-control" />
-                                            <span asp-validation-for="CarrierStatus" class="text-danger"></span>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="submit" value="Create" class="btn btn-primary" />
-                                        </div>
-                                    </div>
-                                </div> <!-- end card-->
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                </label>
             </div>
-            <!-- end row -->
-
-        </div> <!-- container-fluid -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <!-- End Page-content -->
 </div>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

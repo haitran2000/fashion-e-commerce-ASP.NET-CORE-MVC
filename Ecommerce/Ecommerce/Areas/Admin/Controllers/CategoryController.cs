@@ -25,7 +25,7 @@ namespace Ecommerce.Areas.Admin.Controllers
         // GET: Admin/Category
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Category.ToListAsync());
+            return View(await _context.Categories.ToListAsync());
         }
 
         // GET: Admin/Category/Details/5
@@ -36,7 +36,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var categoryModel = await _context.Category
+            var categoryModel = await _context.Categories
                 .FirstOrDefaultAsync(m => m.CategoryID == id);
             if (categoryModel == null)
             {
@@ -53,20 +53,22 @@ namespace Ecommerce.Areas.Admin.Controllers
         }
 
         // POST: Admin/Category/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryID,CategoryName,CategoryDescription,CategoryKeyWord,CategoryPicture,CategoryStatus")] CategoryModel categoryModel, IFormFile ful)
+        public async Task<IActionResult> Create([Bind("CategoryID,Name,Description,KeyWord,Picture,Status")] CategoryModel categoryModel, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image", categoryModel.CategoryID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                _context.Add(categoryModel);
+                //Image.UploadPicture(sliderModel.SliderID, sliderModel.Picture, ful);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/category", categoryModel.CategoryID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await ful.CopyToAsync(stream);
                 }
-                categoryModel.CategoryPicture = categoryModel.CategoryID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                categoryModel.Picture = categoryModel.CategoryID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                 _context.Add(categoryModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,7 +84,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var categoryModel = await _context.Category.FindAsync(id);
+            var categoryModel = await _context.Categories.FindAsync(id);
             if (categoryModel == null)
             {
                 return NotFound();
@@ -91,11 +93,11 @@ namespace Ecommerce.Areas.Admin.Controllers
         }
 
         // POST: Admin/Category/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryID,CategoryName,CategoryDescription,CategoryKeyWord,CategoryPicture,CategoryStatus")] CategoryModel categoryModel)
+        public async Task<IActionResult> Edit(int id, [Bind("CategoryID,Name,Description,KeyWord,Picture,Status")] CategoryModel categoryModel, IFormFile ful)
         {
             if (id != categoryModel.CategoryID)
             {
@@ -106,6 +108,14 @@ namespace Ecommerce.Areas.Admin.Controllers
             {
                 try
                 {
+                    _context.Add(categoryModel);
+                    //Image.UploadPicture(sliderModel.SliderID, sliderModel.Picture, ful);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/category", categoryModel.CategoryID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    categoryModel.Picture = categoryModel.CategoryID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                     _context.Update(categoryModel);
                     await _context.SaveChangesAsync();
                 }
@@ -133,7 +143,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var categoryModel = await _context.Category
+            var categoryModel = await _context.Categories
                 .FirstOrDefaultAsync(m => m.CategoryID == id);
             if (categoryModel == null)
             {
@@ -148,15 +158,15 @@ namespace Ecommerce.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var categoryModel = await _context.Category.FindAsync(id);
-            _context.Category.Remove(categoryModel);
+            var categoryModel = await _context.Categories.FindAsync(id);
+            _context.Categories.Remove(categoryModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CategoryModelExists(int id)
         {
-            return _context.Category.Any(e => e.CategoryID == id);
+            return _context.Categories.Any(e => e.CategoryID == id);
         }
     }
 }

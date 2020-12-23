@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ecommerce.Areas.Admin.Data;
 using Ecommerce.Areas.Admin.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Ecommerce.Areas.Admin.Controllers
 {
@@ -23,7 +25,7 @@ namespace Ecommerce.Areas.Admin.Controllers
         // GET: Admin/Supplier
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Supplier.ToListAsync());
+            return View(await _context.Suppliers.ToListAsync());
         }
 
         // GET: Admin/Supplier/Details/5
@@ -34,14 +36,14 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var suppliersModel = await _context.Supplier
+            var supplierModel = await _context.Suppliers
                 .FirstOrDefaultAsync(m => m.SupplierID == id);
-            if (suppliersModel == null)
+            if (supplierModel == null)
             {
                 return NotFound();
             }
 
-            return View(suppliersModel);
+            return View(supplierModel);
         }
 
         // GET: Admin/Supplier/Create
@@ -51,19 +53,27 @@ namespace Ecommerce.Areas.Admin.Controllers
         }
 
         // POST: Admin/Supplier/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SupplierID,SupplierName,SupplierAdress,SupplierPhone,SupplierNotes,SupplierLogo,SupplierStatus")] SuppliersModel suppliersModel)
+        public async Task<IActionResult> Create([Bind("SupplierID,Name,Adress,Phone,Notes,Logo,Status")] SupplierModel supplierModel, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(suppliersModel);
+                _context.Add(supplierModel);
+                //Image.UploadPicture(sliderModel.SliderID, sliderModel.Picture, ful);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/supplier", supplierModel.SupplierID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ful.CopyToAsync(stream);
+                }
+                supplierModel.Logo = supplierModel.SupplierID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                _context.Add(supplierModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(suppliersModel);
+            return View(supplierModel);
         }
 
         // GET: Admin/Supplier/Edit/5
@@ -74,22 +84,22 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var suppliersModel = await _context.Supplier.FindAsync(id);
-            if (suppliersModel == null)
+            var supplierModel = await _context.Suppliers.FindAsync(id);
+            if (supplierModel == null)
             {
                 return NotFound();
             }
-            return View(suppliersModel);
+            return View(supplierModel);
         }
 
         // POST: Admin/Supplier/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SupplierID,SupplierName,SupplierAdress,SupplierPhone,SupplierNotes,SupplierLogo,SupplierStatus")] SuppliersModel suppliersModel)
+        public async Task<IActionResult> Edit(int id, [Bind("SupplierID,Name,Adress,Phone,Notes,Logo,Status")] SupplierModel supplierModel, IFormFile ful)
         {
-            if (id != suppliersModel.SupplierID)
+            if (id != supplierModel.SupplierID)
             {
                 return NotFound();
             }
@@ -98,12 +108,20 @@ namespace Ecommerce.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(suppliersModel);
+                    _context.Add(supplierModel);
+                    //Image.UploadPicture(sliderModel.SliderID, sliderModel.Picture, ful);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/supplier", supplierModel.SupplierID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    supplierModel.Logo = supplierModel.SupplierID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                    _context.Add(supplierModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SuppliersModelExists(suppliersModel.SupplierID))
+                    if (!SupplierModelExists(supplierModel.SupplierID))
                     {
                         return NotFound();
                     }
@@ -114,7 +132,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(suppliersModel);
+            return View(supplierModel);
         }
 
         // GET: Admin/Supplier/Delete/5
@@ -125,14 +143,14 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var suppliersModel = await _context.Supplier
+            var supplierModel = await _context.Suppliers
                 .FirstOrDefaultAsync(m => m.SupplierID == id);
-            if (suppliersModel == null)
+            if (supplierModel == null)
             {
                 return NotFound();
             }
 
-            return View(suppliersModel);
+            return View(supplierModel);
         }
 
         // POST: Admin/Supplier/Delete/5
@@ -140,15 +158,15 @@ namespace Ecommerce.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var suppliersModel = await _context.Supplier.FindAsync(id);
-            _context.Supplier.Remove(suppliersModel);
+            var supplierModel = await _context.Suppliers.FindAsync(id);
+            _context.Suppliers.Remove(supplierModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SuppliersModelExists(int id)
+        private bool SupplierModelExists(int id)
         {
-            return _context.Supplier.Any(e => e.SupplierID == id);
+            return _context.Suppliers.Any(e => e.SupplierID == id);
         }
     }
 }

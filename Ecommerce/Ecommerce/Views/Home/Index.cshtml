@@ -2,10 +2,11 @@
     <div class="row pos_home">
         <div class="col-lg-3 col-md-8 col-12">
             <!--sidebar banner-->
-            @await Html.PartialAsync("_BannerLeftPartial.cshtml")
+            <div>@await Component.InvokeAsync("Slider")</div>
             <!--sidebar banner end-->
             <!--categorie menu start-->
-            @await Html.PartialAsync("_CategoryPartial.cshtml")
+            @await Component.InvokeAsync("Category")
+            <div><vc:category-list /></div>
             <!--categorie menu end-->
             <!--wishlist block start-->
             @await Html.PartialAsync("_WishlistPartial.cshtml")
@@ -41,7 +42,7 @@
             </div>
             <!--newsletter block end-->
             <!--sidebar banner-->
-            @await Html.PartialAsync("_BannerLeftBottomPartial.cshtml")
+            @await Component.InvokeAsync("Slider")
             <!--sidebar banner end-->
 
 
@@ -49,10 +50,10 @@
         </div>
         <div class="col-lg-9 col-md-12">
             <!--banner slider start-->
-            @await Html.PartialAsync("_BannerRight.cshtml")
+            @await Component.InvokeAsync("Slider")
             <!--banner slider start-->
             <!--new product area start-->
-            @await Html.PartialAsync("_NewProductPartial.cshtml")
+            @await Component.InvokeAsync("Product")
             <!--new product area start-->
             <!--featured product start-->
             @await Html.PartialAsync("_FeaturedProductPartial.cshtml")
@@ -61,7 +62,7 @@
             @await Html.PartialAsync("_BannerRightBottom.cshtml")
             <!--banner area end-->
             <!--brand logo strat-->
-            @await Html.PartialAsync("_BrandPartial.cshtml")
+            @await Component.InvokeAsync("Brand")
             <!--brand logo end-->
         </div>
     </div>

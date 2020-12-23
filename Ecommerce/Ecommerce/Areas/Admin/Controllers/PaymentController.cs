@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ecommerce.Areas.Admin.Data;
 using Ecommerce.Areas.Admin.Models;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Ecommerce.Areas.Admin.Controllers
 {
@@ -23,7 +25,7 @@ namespace Ecommerce.Areas.Admin.Controllers
         // GET: Admin/Payment
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Payment.ToListAsync());
+            return View(await _context.Payments.ToListAsync());
         }
 
         // GET: Admin/Payment/Details/5
@@ -34,7 +36,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var paymentModel = await _context.Payment
+            var paymentModel = await _context.Payments
                 .FirstOrDefaultAsync(m => m.PaymentID == id);
             if (paymentModel == null)
             {
@@ -51,14 +53,22 @@ namespace Ecommerce.Areas.Admin.Controllers
         }
 
         // POST: Admin/Payment/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PaymentID,PaymentName,PaymentStatus")] PaymentModel paymentModel)
+        public async Task<IActionResult> Create([Bind("PaymentID,Name,Logo,Status")] PaymentModel paymentModel, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
+                _context.Add(paymentModel);
+                //Image.UploadPicture(sliderModel.SliderID, sliderModel.Picture, ful);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/payment", paymentModel.PaymentID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ful.CopyToAsync(stream);
+                }
+                paymentModel.Logo = paymentModel.PaymentID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                 _context.Add(paymentModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -74,7 +84,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var paymentModel = await _context.Payment.FindAsync(id);
+            var paymentModel = await _context.Payments.FindAsync(id);
             if (paymentModel == null)
             {
                 return NotFound();
@@ -83,11 +93,11 @@ namespace Ecommerce.Areas.Admin.Controllers
         }
 
         // POST: Admin/Payment/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PaymentID,PaymentName,PaymentStatus")] PaymentModel paymentModel)
+        public async Task<IActionResult> Edit(int id, [Bind("PaymentID,Name,Logo,Status")] PaymentModel paymentModel, IFormFile ful)
         {
             if (id != paymentModel.PaymentID)
             {
@@ -98,6 +108,14 @@ namespace Ecommerce.Areas.Admin.Controllers
             {
                 try
                 {
+                    _context.Add(paymentModel);
+                    //Image.UploadPicture(sliderModel.SliderID, sliderModel.Picture, ful);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/payment", paymentModel.PaymentID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    paymentModel.Logo = paymentModel.PaymentID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                     _context.Update(paymentModel);
                     await _context.SaveChangesAsync();
                 }
@@ -125,7 +143,7 @@ namespace Ecommerce.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var paymentModel = await _context.Payment
+            var paymentModel = await _context.Payments
                 .FirstOrDefaultAsync(m => m.PaymentID == id);
             if (paymentModel == null)
             {
@@ -140,15 +158,15 @@ namespace Ecommerce.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var paymentModel = await _context.Payment.FindAsync(id);
-            _context.Payment.Remove(paymentModel);
+            var paymentModel = await _context.Payments.FindAsync(id);
+            _context.Payments.Remove(paymentModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PaymentModelExists(int id)
         {
-            return _context.Payment.Any(e => e.PaymentID == id);
+            return _context.Payments.Any(e => e.PaymentID == id);
         }
     }
 }

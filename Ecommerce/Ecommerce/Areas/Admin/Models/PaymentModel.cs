@@ -7,9 +7,10 @@ namespace Ecommerce.Areas.Admin.Models
 {
     public class PaymentModel
     {
+        [Key]
         public int PaymentID { get; set; }
-        public string PaymentName { get; set; }
-        public int PaymentStatus { get; set; }
-        public List<OrdersModel> Orders { set; get; }
+        public string Name { get; set; }
+        public string Logo { get; set; }
+        public bool Status { get; set; }
     }
 }

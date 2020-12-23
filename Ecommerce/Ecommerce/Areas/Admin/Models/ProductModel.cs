@@ -9,24 +9,23 @@ namespace Ecommerce.Areas.Admin.Models
 {
     public class ProductModel
     {
+        [Key]
         public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
-        public string ProductPicture1 { get; set; }
-        public string ProductPicture2 { get; set; }
-        public string ProductPicture3 { get; set; }
-        public int ProductNumber { get; set; }
-        public long ProductPrice { get; set; }
-        public long ProductDiscount { get; set; }
-        public int ProductSupplierID { get; set; }
-        public int ProductBrandID { get; set; }
-        public BrandModel Brands { get; set; }
-        public SuppliersModel Suppliers { get; set; }
-        public int ProductCategoryID { get; set; }
-        public CategoryModel Categorys { get; set; }
-        public List<OrderDetailsModel> OrderDetails { set; get; }
-        public int ProductStatus { get; set; }
-        
-        
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Picture { get; set; }
+        public int Quantity { get; set; }
+        public long Price { get; set; }
+        public string Content { get; set; }
+        public int SupplierID { get; set; }
+        [ForeignKey("SupplierID")]
+        public virtual SupplierModel Supplier { get; set; }
+        public int BrandID { get; set; }
+        [ForeignKey("BrandID")]
+        public virtual BrandModel Brand { get; set; }
+        public int CategoryID { get; set; }
+        [ForeignKey("CategoryID")]
+        public virtual CategoryModel Category { get; set; }
+        public bool Status { get; set; }
     }
 }

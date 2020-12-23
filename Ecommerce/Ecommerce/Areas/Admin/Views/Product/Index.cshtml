@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <div class="main-content">
 
     <div class="page-content">
@@ -55,18 +56,20 @@
                                                     <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                                 </div>
                                             </th>
-                                            <th> @Html.DisplayNameFor(model => model.ProductName)</th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.ProductNumber)
+                                                @Html.DisplayNameFor(model => model.Name)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.ProductDescription)
+                                                @Html.DisplayNameFor(model => model.Description)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.ProductPicture1)
+                                                @Html.DisplayNameFor(model => model.Picture)
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.ProductPrice)
+                                                @Html.DisplayNameFor(model => model.Price)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Status)
                                             </th>
                                             <th>View Details</th>
                                             <th>Action</th>
@@ -82,18 +85,21 @@
                                                     <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                                 </div>
                                             </td>
-                                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                            
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.ProductNumber)
+                                                @Html.DisplayFor(modelItem => item.Name)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.ProductDescription)
+                                                @Html.DisplayFor(modelItem => item.Description)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.ProductPicture1)
+                                                <img src="~/image/product/@item.Picture" style="height:150px;width:200px" />
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.ProductPrice)
+                                                @Html.DisplayFor(modelItem => item.Price)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Status)
                                             </td>
                                             <td>
                                                 <!-- Button trigger modal -->
@@ -110,23 +116,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <ul class="pagination pagination-rounded justify-content-end mb-2">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                        <i class="mdi mdi-chevron-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                        <i class="mdi mdi-chevron-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -136,108 +125,4 @@
     </div>
     <!-- End Page-content -->
     <!-- Modal -->
-    <div class="modal fade exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
-                    <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
-
-                    <div class="table-responsive">
-                        <table class="table table-centered table-nowrap">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <div>
-                                            <img src="assets\images\product\img-7.png" alt="" class="avatar-sm">
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div>
-                                            <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                                            <p class="text-muted mb-0">$ 225 x 1</p>
-                                        </div>
-                                    </td>
-                                    <td>$ 255</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div>
-                                            <img src="assets\images\product\img-4.png" alt="" class="avatar-sm">
-                                        </div>
-                                    </th>
-                                    <td>
-                                        <div>
-                                            <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
-                                            <p class="text-muted mb-0">$ 145 x 1</p>
-                                        </div>
-                                    </td>
-                                    <td>$ 145</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h6 class="m-0 text-right">Sub Total:</h6>
-                                    </td>
-                                    <td>
-                                        $ 400
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h6 class="m-0 text-right">Shipping:</h6>
-                                    </td>
-                                    <td>
-                                        Free
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h6 class="m-0 text-right">Total:</h6>
-                                    </td>
-                                    <td>
-                                        $ 400
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <script>document.write(new Date().getFullYear())</script>2020 © Skote.
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-right d-none d-sm-block">
-                        Design &amp; Develop by Themesbrand
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -1,0 +1,17 @@
+﻿@model IList<Ecommerce.Areas.Admin.Models.SliderModel>
+<div class="banner_slider slider_1">
+    <div class="slider_active owl-carousel">
+        @foreach (var m in Model)
+        {
+            <div class="single_slider" style=" background-image: url(~/wwwroot/user/assets/img/slider/slide_1.png)">
+                <div class="slider_content">
+                    <div class="slider_content_inner">
+                        <h1>@m.Title</h1>
+                        <p>@m.Content </p>
+                        <a href="#">shop now</a>
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+</div>

@@ -3,39 +3,112 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="main-content">
 
-<h1>Index</h1>
+    <div class="page-content">
+        <div class="container-fluid">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentStatus)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentStatus)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PaymentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PaymentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PaymentID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Orders</h4>
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Orders</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-4">
+                                    <div class="search-box mr-2 mb-2 d-inline-block">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Search...">
+                                            <i class="bx bx-search-alt search-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="text-sm-right">
+                                        <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i><a asp-action="Create">Create New</a></button>
+                                    </div>
+                                </div><!-- end col-->
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="width: 20px;">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                                </div>
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Name)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Logo)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Status)
+                                            </th>
+                                            <th>View Details</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                    <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Logo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Status)
+                                            </td>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <a asp-action="Details" asp-route-id="@item.PaymentID">
+                                                    View Details
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.PaymentID"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                <a asp-action="Delete" asp-route-id="@item.PaymentID"><i class="mdi mdi-close font-size-18"></i></a>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+    <!-- Modal -->
+</div>
