@@ -1,0 +1,91 @@
+﻿@model e_Commerce.Areas.Admin.ViewModel.ProductViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>ProductModel</h4>
+<hr />
+<div class="main-content">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Products.Name" class="control-label"></label>
+                <input asp-for="Products.Name" class="form-control" />
+                <span asp-validation-for="Products.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.Description" class="control-label"></label>
+                <input asp-for="Products.Description" class="form-control" />
+                <span asp-validation-for="Products.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="ful" name="ful" />
+                    <label class="custom-file-label" for="ful">Chose file</label>
+                </div>
+                <div class="form-group">
+                    <img id="imgPre" src="~/image/no_image.png" alt="no image" class="img-thumbnail" style="height:150px;width:200px" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.Quantity" class="control-label"></label>
+                <input asp-for="Products.Quantity" class="form-control" />
+                <span asp-validation-for="Products.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.Price" class="control-label"></label>
+                <input asp-for="Products.Price" class="form-control" />
+                <span asp-validation-for="Products.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.Content" class="control-label"></label>
+                <input asp-for="Products.Content" class="form-control" />
+                <span asp-validation-for="Products.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.BrandID" class="control-label"></label>
+                <select asp-for="Products.BrandID" class="form-control" asp-items="@(new SelectList(Model.BrandList,"BrandID","Name"))"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Products.CategoryID" class="control-label"></label>
+                <select asp-for="Products.CategoryID" class="form-control" asp-items="@(new SelectList(Model.CategoryList,"CategoryID","Name"))"></select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Products.Status" /> @Html.DisplayNameFor(model => model.Products.Status)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+        function readURL(input, idImg) {
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                $(idImg).attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+    $("#ful").change(function () {
+        readURL(this, '#imgPre');
+    });
+</script>
+}

@@ -1,0 +1,13 @@
+﻿<div class=" pos_home_section">
+    <div class="row pos_home">
+        <div class="col-lg-3 col-md-8 col-12">
+            @await Component.InvokeAsync("Category")
+            <div><vc:category-list /></div>
+        </div>
+        <div class="col-lg-9 col-md-12">
+            @await Component.InvokeAsync("Product")
+            @await Html.PartialAsync("_BannerRightBottom.cshtml")
+            @await Component.InvokeAsync("Brand")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@using e_Commerce.Models;
+@*@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+
+@{
+    var data = Context.Session.GetString("cart");
+    int coutCart = 0;
+    if (data == null)
+    {
+        coutCart = 0;
+    }
+    else
+    {
+        var data2 = Context.Session.GetString("cart");
+        List<CartModel> dataCart = JsonConvert.DeserializeObject<List<CartModel>>(data2);
+        foreach (var item in dataCart)
+        {
+            coutCart += item.Quantity;
+        }
+
+    }
+
+}*@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    @await Html.PartialAsync("_HeadPartial.cshtml")
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <!-- Add your site or application content here -->
+    <!--pos page start-->
+    <div class="pos_page">
+        <div class="container">
+            <!--pos page inner-->
+            <div class="pos_page_inner">
+                <!--header area -->
+                @await Html.PartialAsync("_HeaderPartial.cshtml")
+                <!-- ========== Left Sidebar Start ========== -->
+
+                @RenderBody()
+                <!--pos home section end-->
+            </div>
+            <!--pos page inner end-->
+        </div>
+    </div>
+    <!--pos page end-->
+    <!--footer area start-->
+    @await Html.PartialAsync("_FooterPartial.cshtml")
+    @RenderSection("Scripts", required: false)
+    <!-- all js here -->
+    <script src="~/user/assets/js/vendor/jquery-1.12.0.min.js"></script>
+    <script src="~/user/assets/js/popper.js"></script>
+    <script src="~/user/assets/js/bootstrap.min.js"></script>
+    <script src="~/user/assets/js/plugins.js"></script>
+    <script src="~/user/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿@page
+@using e_Commerce.Helper;
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+    <div class="customer_login">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form register">
+                    <h2>Register</h2>
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <p>
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Input.Name"></label>
+                            <input asp-for="Input.Name" class="form-control" />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Input.PhoneNumber"></label>
+                            <input asp-for="Input.PhoneNumber" class="form-control" />
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Input.StreetAddress"></label>
+                            <input asp-for="Input.StreetAddress" class="form-control" />
+                            <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+                        </p>
+
+                        <p>
+                            <label asp-for="Input.Ward"></label>
+                            <input asp-for="Input.Ward" class="form-control" />
+                            <span asp-validation-for="Input.Ward" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Input.District"></label>
+                            <input asp-for="Input.District" class="form-control" />
+                            <span asp-validation-for="Input.District" class="text-danger"></span>
+                        </p>
+                        <p>
+                            <label asp-for="Input.City"></label>
+                            <input asp-for="Input.City" class="form-control" />
+                            <span asp-validation-for="Input.City" class="text-danger"></span>
+                        </p>
+                        @if (User.IsInRole(SD.AdminUser))
+                        {
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <input type="radio" checked name="UserRole" value="@SD.AdminUser" />@SD.AdminUser
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="radio" name="UserRole" value="@SD.CustomerUser" />@SD.CustomerUser
+                                </div>
+                            </div>
+                        }
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+            <!--register area end-->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

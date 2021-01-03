@@ -1,0 +1,18 @@
+﻿@model IList<e_Commerce.Models.BrandModel>
+<div class="brand_logo mb-60">
+    <div class="block_title">
+        <h3>Brands</h3>
+    </div>
+    <div class="row">
+        <div class="brand_active owl-carousel">
+            @foreach (var m in Model)
+            {
+                <div class="col-lg-2">
+                    <div class="single_brand">
+                        <a href="#"><img src="~/image/brand/@m.Picture" alt=""></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
