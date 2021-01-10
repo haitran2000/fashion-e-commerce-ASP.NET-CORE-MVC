@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8cRT7yQF1Ey+ip4am71K2aZ0DkgtOwH8ejGj72T4YLDzUwUe0h+uLOUaHwb87h+nrMs8oRC1JU6+HxEUq7YzOg==",
+  "dgSpecHash": "4rSdjpZe0QZSOvU9wTvVPDqqp76/AsiYVyKT0q8npAnyL45VkaqOC7OAcY3aJw0wZA96tD/EdvUyL8QPnlehPQ==",
   "success": true,
-  "projectFilePath": "G:\\DoAn\\New folder\\e-Commerce\\e-Commerce\\e-Commerce.csproj",
+  "projectFilePath": "C:\\Users\\H\\Desktop\\ASP.NET\\E-commerce\\e-Commerce\\e-Commerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\H\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.10\\microsoft.aspnetcore.cryptography.internal.3.1.10.nupkg.sha512",
     "C:\\Users\\H\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.10\\microsoft.aspnetcore.cryptography.keyderivation.3.1.10.nupkg.sha512",
@@ -183,7 +183,9 @@
     "C:\\Users\\H\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\H\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\H\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\H\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\H\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\H\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\H\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512"
   ],
   "logs": []
 }

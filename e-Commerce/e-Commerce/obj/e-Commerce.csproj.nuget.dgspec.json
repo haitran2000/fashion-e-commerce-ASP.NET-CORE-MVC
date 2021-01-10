@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\DoAn\\New folder\\e-Commerce\\e-Commerce\\e-Commerce.csproj": {}
+    "C:\\Users\\H\\Desktop\\ASP.NET\\E-commerce\\e-Commerce\\e-Commerce.csproj": {}
   },
   "projects": {
-    "G:\\DoAn\\New folder\\e-Commerce\\e-Commerce\\e-Commerce.csproj": {
+    "C:\\Users\\H\\Desktop\\ASP.NET\\E-commerce\\e-Commerce\\e-Commerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\DoAn\\New folder\\e-Commerce\\e-Commerce\\e-Commerce.csproj",
+        "projectUniqueName": "C:\\Users\\H\\Desktop\\ASP.NET\\E-commerce\\e-Commerce\\e-Commerce.csproj",
         "projectName": "e-Commerce",
-        "projectPath": "G:\\DoAn\\New folder\\e-Commerce\\e-Commerce\\e-Commerce.csproj",
+        "projectPath": "C:\\Users\\H\\Desktop\\ASP.NET\\E-commerce\\e-Commerce\\e-Commerce.csproj",
         "packagesPath": "C:\\Users\\H\\.nuget\\packages\\",
-        "outputPath": "G:\\DoAn\\New folder\\e-Commerce\\e-Commerce\\obj\\",
+        "outputPath": "C:\\Users\\H\\Desktop\\ASP.NET\\E-commerce\\e-Commerce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\H\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -71,6 +71,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "xunit.extensibility.core": {
+              "target": "Package",
+              "version": "[2.4.1, )"
             }
           },
           "imports": [

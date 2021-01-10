@@ -5,6 +5,7 @@
     <UserSecretsId>aspnet-e_Commerce-2F519AD6-9A83-42CF-881B-AE09A62DDE02</UserSecretsId>
     <RootNamespace>e_Commerce</RootNamespace>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <Configurations>Debug;Release;Debug In Chrome</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,14 +17,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.10" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\API\Controllers\" />
-    <Folder Include="Areas\API\Data\" />
-    <Folder Include="Areas\API\Models\" />
-    <Folder Include="Areas\API\Views\" />
-    <Folder Include="wwwroot\image\product\" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
   </ItemGroup>
 
 </Project>

@@ -21,12 +21,6 @@ namespace e_Commerce.Data
         public DbSet<PaymentModel> Payments { get; set; }
         public DbSet<ProductModel> Products { get; set; }
         public DbSet<UserModel> User { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OrderDetailModel>()
-                .HasKey(c => new { c.OrderID, c.ProductID });
-
-            base.OnModelCreating(modelBuilder);
-        }
+        public DbSet<ShoppingCartModel> ShoppingCarts { get; set; }
     }
-    }
+}

@@ -1,16 +1,13 @@
-﻿@model IEnumerable<e_Commerce.Models.CategoryModel>
+﻿@model e_Commerce.Models.CategoryModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<partial name="Create"/>
+<a asp-action="Index" asp-route-id="">Create New</a>
 <table class="main-content">
+
     <thead>
         <tr>
             <th>
@@ -26,23 +23,55 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoryID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoryID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (CategoryModel item in ViewBag.ListCategory)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Index" asp-route-id="@item.CategoryID">Chỉnh Sửa</a>
+                    <button class="btn btn-warning" name="btn_update_stt" data-id="@item.CategoryID"
+                            data-stt="@(item.Status==true?0:1)" data-name="@item.Name">
+                        @{
+                            if (item.Status == true)
+                            {
+                                @:Ẩn
+                            }
+                            else
+                            {
+                                @:Hiện
+                            }
+                        }
+                    </button>
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('button[name=btn_update_stt]').click(function () {
+            var id = $(this).attr('data-id');
+            var name = $(this).attr('data-name');
+            var stt = ($(this).attr('data-stt') == 0 ? false : true);
+            alert("Hello");
+            $.ajax({
+                method: "PUT",
+                url: "../api/Category_API/PutCategoryModel/" + id,
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify({ "CategoryID": id, "Name": name, "Status": stt })
+            })
+             .done(function (msg) {
+                    alert(msg);
+                });
+        })</script>
+}

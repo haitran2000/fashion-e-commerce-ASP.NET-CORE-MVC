@@ -109,7 +109,7 @@ namespace e_Commerce.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _userManager.AddToRoleAsync(user,SD.CustomerUser);
+                        await _userManager.AddToRoleAsync(user,SD.AdminUser);
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }

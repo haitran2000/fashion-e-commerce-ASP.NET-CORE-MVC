@@ -10,12 +10,12 @@
                 <div class="col-lg-3">
                     <div class="single_product">
                         <div class="product_thumb">
-                            <a href="single-product.html"><img src="~/image/product/@m.Picture" /></a>
+                            <a href="single-product.html"><img src="~/image/product/dark_585x663.jpg" /></a>
                             <div class="img_icone">
                                 <img src="~/user/assets/img/cart/span-new.png" alt="">
                             </div>
                             <div class="product_action">
-                                <a asp-controller="Cart" asp-action="Buy" asp-route-id="@m.ProductID"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                <a asp-area="Customer" asp-controller="Home" asp-action="Add" asp-route-productId="@m.ProductID"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
                             </div>
                         </div>
                         <div class="product_content">

@@ -9,8 +9,13 @@ namespace e_Commerce.Models
     {
         [Key]
         public int CategoryID { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Tên Loại Hàng")]
         public string Name { get; set; }
+        [StringLength(1000)]
+        [Display(Name = "Thông Tin")]
         public string Description { get; set; }
+        [Display(Name = "Trạng Thái")]
         public bool Status { get; set; }
     }
 }

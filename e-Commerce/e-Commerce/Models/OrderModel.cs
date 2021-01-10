@@ -20,9 +20,13 @@ namespace e_Commerce.Models
         [ForeignKey("PaymentID")]
         public virtual PaymentModel Payment { get; set; }
         [Required]
-        public double TotalMoney { get; set; }
+        [Display(Name = "Tổng Tiền")]
+        public decimal TotalMoney { get; set; }
+        [Display(Name = "Ngày Đặt Hàng")]
         public DateTime Date { get; set; }
+        [Display(Name = "Trạng Thái")]
 
         public bool Status { get; set; }
+        public List<OrderDetailModel> OrderDetails { get; set; }
     }
 }

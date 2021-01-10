@@ -11,11 +11,21 @@ namespace e_Commerce.Models
     {
         [Key]
         public int ProductID { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Tên Sản Phẩm")]
         public string Name { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Mô tả")]
         public string Description { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Hình Sản Phẩm")]
         public string Picture { get; set; }
+        [Display(Name = "Sô Lượng")]
         public int Quantity { get; set; }
-        public double Price { get; set; }
+        [Display(Name = "Giá")]
+        public decimal Price { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Nội Dung")]
         public string Content { get; set; }
         public int BrandID { get; set; }
         [ForeignKey("BrandID")]
@@ -23,6 +33,8 @@ namespace e_Commerce.Models
         public int CategoryID { get; set; }
         [ForeignKey("CategoryID")]
         public virtual CategoryModel Category { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Trạng Thái")]
         public bool Status { get; set; }
     }
 }

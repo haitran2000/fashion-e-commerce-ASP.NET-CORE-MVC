@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using e_Commerce.Data;
 using e_Commerce.Models;
+using e_Commerce.Areas.Admin.ViewModel;
 
 namespace e_Commerce.Areas.Admin.Controllers
 {
@@ -48,11 +49,12 @@ namespace e_Commerce.Areas.Admin.Controllers
         }
 
         // GET: Admin/Product/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "BrandID");
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID");
-            return View();
+            ProductViewModel productView = new ProductViewModel();
+            productView.BrandList = await _context.Brands.ToListAsync();
+            productView.CategoryList = await _context.Categories.ToListAsync();
+            return View(productView);
         }
 
         // POST: Admin/Product/Create
