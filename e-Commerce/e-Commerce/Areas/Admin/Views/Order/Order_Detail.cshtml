@@ -1,0 +1,98 @@
+﻿@model IEnumerable<e_Commerce.Models.OrderDetailModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="mt-5">
+                <h5 class="mb-3">Thông Tin :</h5>
+
+                <div class="table-responsive">
+                    <table class="table mb-0 table-bordered">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="width: 400px;">Tên Khách Hàng :</th>
+                                <td> @Model.First().Order.Name</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Địa Chỉ Nhận Hàng </th>
+                                <td> @Model.First().Order.StreetAddress,@Model.First().Order.Ward,@Model.First().Order.District,@Model.First().Order.City</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số Điện Thoại</th>
+                                <td>  @Model.First().Order.PhoneNumber</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số Lượng Sản Phẩm </th>
+                                <td> @Model.Count() Sản Phẩm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="width: 20px;">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                                </div>
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Product.Name)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Product.Picture)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Product.Price)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Quantity)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Product.Name)
+                                                </td>
+                                                <td>
+                                                    <img src="~/image/product/@Html.DisplayFor(modelItem => item.ProductID)" style="height:50px;width:50px" />
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Product.Price)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+    <!-- Modal -->
+</div>

@@ -1,16 +1,11 @@
 ﻿@model IList<e_Commerce.Models.ProductModel>
-<div class="new_product_area">
-    <div class="block_title">
-        <h3>New Products</h3>
-    </div>
-    <div class="row">
-        <div class="product_active owl-carousel">
+
             @foreach (var m in Model)
             {
                 <div class="col-lg-3">
                     <div class="single_product">
                         <div class="product_thumb">
-                            <a href="single-product.html"><img src="~/image/product/dark_585x663.jpg" /></a>
+                            <a href="single-product.html"><img src="~/image/product/@m.Picture" /></a>
                             <div class="img_icone">
                                 <img src="~/user/assets/img/cart/span-new.png" alt="">
                             </div>
@@ -19,18 +14,15 @@
                             </div>
                         </div>
                         <div class="product_content">
-                            <span class="product_price">@m.Price</span>
+                            <span class="product_price">@(String.Format("{0:n0}",m.Price)) VND</span>
                             <h3 class="product_title"><a href="single-product.html">@m.Name</a></h3>
                         </div>
                         <div class="product_info">
                             <ul>
-                                <li><a href="#" title=" Add to Wishlist ">Add to Wishlist</a></li>
-                                <li><a href="#" data-toggle="modal" data-target="#modal_box" title="Quick view">View Detail</a></li>
+                             <li><a  asp-area="Customer" asp-controller="Home" asp-action="Details" asp-route-id="@m.ProductID" title="Quick view">View Detail</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             }
-        </div>
-    </div>
-</div>
+        

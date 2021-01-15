@@ -44,6 +44,11 @@ namespace e_Commerce
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
             });
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +76,7 @@ namespace e_Commerce
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapControllerRoute(
                      name: "default",
                      pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");

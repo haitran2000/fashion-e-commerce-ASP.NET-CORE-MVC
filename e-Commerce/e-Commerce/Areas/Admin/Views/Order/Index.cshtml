@@ -1,0 +1,170 @@
+﻿@model IEnumerable<e_Commerce.Models.OrderModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Đơn Hàng</h4>
+
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
+                                <li class="breadcrumb-item active">Đơn Hàng</li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-4">
+                                    <div class="search-box mr-2 mb-2 d-inline-block">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Search...">
+                                            <i class="bx bx-search-alt search-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="width: 20px;">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                                </div>
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.OrderID)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Name)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.TotalMoney)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.StreetAddress)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Date)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Status)
+                                            </th>
+                                            <th>Xem Chi Tiết</th>
+                                            <th>Xác Nhận</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                        <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td><a href="javascript: void(0);" class="text-body font-weight-bold">#@Html.DisplayFor(modelItem => item.OrderID)</a> </td>
+                                                <td> @Html.DisplayFor(modelItem => item.Name)</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.TotalMoney) VNĐ
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.StreetAddress)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Date)
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-warning" name="btn_update_stt" data-id="@item.OrderID"
+                                                            data-stt="@(item.Status==true?0:1)">
+                                                        @{
+                                                            if (item.Status == true)
+                                                            {
+                                                                @:Đã Xác Nhận
+                                                            }
+                                                            else
+                                                            {
+                                                                @:Chờ Xác Nhận
+                                                            }
+                                                        }
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <!-- Button trigger modal -->
+                                                    <a asp-action="Order_Detail" asp-route-id="@item.OrderID">
+                                                        Chi Tiết
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+    <!-- Modal -->
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+        $('button[name=btn_update_stt]').click(function () {
+            var id = $(this).attr('data-id');
+            var stt = ($(this).attr('data-stt') == 0 ? false : true);
+            $.ajax({
+                method: "PUT",
+                url: "../api/Order_API/PutOrderModel/" + id,
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify({ "id": id, "status": stt })
+            })
+                .done(function (msg) {
+                    if (msg == '0') {
+                        $.notify("Warning: Cập Nhật thất bại", "warn");
+                    }
+                    else {
+                        var r = JSON.parse(msg)
+                        if (r.stt =='True') {
+                            $('button[name=btn_update_stt][data-id=' + r.id + ']').html('Đã Xác Nhận');
+
+                        }
+                        else {
+                            $('button[name=btn_update_stt][data-id=' + r.id + ']').html('Chờ Xác Nhận');
+                        }
+                        $.notify("Cập Nhật Trạng Thái Thành Công", "success");
+                    }
+                });
+        })
+        </script>
+    }

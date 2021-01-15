@@ -65,6 +65,7 @@ namespace e_Commerce.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(brandModel);
+                await _context.SaveChangesAsync();
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/brand", brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
                 using (var stream = new FileStream(path, FileMode.Create))
                 {

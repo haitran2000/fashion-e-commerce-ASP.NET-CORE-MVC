@@ -1,0 +1,39 @@
+﻿@model IList<ShoppingCartModel>
+<div class="shopping_cart">
+    <a href="#"><i class="fa fa-shopping-cart"></i> @Model.Count() <i class="fa fa-angle-down"></i></a>
+
+    <!--mini cart-->
+    <div class="mini_cart">
+        @{
+            decimal total=0;
+            if (Model.Count() > 0)
+            {
+                foreach (var m in Model)
+                {
+                    total = total + (m.Product.Price * m.Amount);
+                    <div class="cart_item">
+                        <div class="cart_img">
+                            <a href="#"><img src="~/image/product/@m.Product.Picture" /></a>
+                        </div>
+                        <div class="cart_info">
+                                    <a href="#">@m.Product.Name</a>
+                                    <span class="cart_price">@m.Product.Price</span>
+                                    <span class="Số Lượng ">@m.Amount</span>
+                        </div>
+                        <div class="cart_remove">
+                            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+                        </div>
+                    </div>
+                    }
+                }
+            }
+                    <div class="total_price">
+                        <span> Tổng </span>
+                        <span class="prices">  @(String.Format("{0:n0}", total)) VND </span>
+                    </div>
+                    <div class="cart_button">
+                        <a asp-controller="Cart" asp-action="Index"> Thanh Toán</a>
+                    </div>
+                </div>
+    <!--mini cart end-->
+</div>

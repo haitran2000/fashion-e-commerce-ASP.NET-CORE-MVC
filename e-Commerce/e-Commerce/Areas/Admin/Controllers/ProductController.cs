@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using e_Commerce.Data;
 using e_Commerce.Models;
 using e_Commerce.Areas.Admin.ViewModel;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace e_Commerce.Areas.Admin.Controllers
 {
@@ -22,10 +24,15 @@ namespace e_Commerce.Areas.Admin.Controllers
         }
 
         // GET: Admin/Product
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? s_name)
         {
-            var dPContext = _context.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(await dPContext.ToListAsync());
+            var sanPham = from l in _context.Products
+                           select l;
+            if (!String.IsNullOrEmpty(s_name))
+            {
+                sanPham = sanPham.Include(p => p.Brand).Include(p => p.Category).Where(s => s.Name.Contains(s_name));
+            }
+            return View(await sanPham.ToListAsync());
         }
 
         // GET: Admin/Product/Details/5
@@ -62,16 +69,21 @@ namespace e_Commerce.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Name,Description,Picture,Quantity,Price,Content,BrandID,CategoryID,Status")] ProductModel productModel)
+        public async Task<IActionResult> Create(ProductViewModel productModel, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(productModel);
+                _context.Add(productModel.Products);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/product", productModel.Products.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ful.CopyToAsync(stream);
+                }
+                productModel.Products.Picture = productModel.Products.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                _context.Add(productModel.Products);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "BrandID", productModel.BrandID);
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", productModel.CategoryID);
             return View(productModel);
         }
 

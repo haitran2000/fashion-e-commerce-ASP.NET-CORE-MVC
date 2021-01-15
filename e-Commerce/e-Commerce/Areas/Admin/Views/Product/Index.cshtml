@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<div class="main-content">
+<div class="main-content" >
 
     <div class="page-content">
         <div class="container-fluid">
@@ -32,12 +32,10 @@
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col-sm-4">
-                                    <div class="search-box mr-2 mb-2 d-inline-block">
-                                        <div class="position-relative">
-                                            <input type="text" class="form-control" placeholder="Search...">
-                                            <i class="bx bx-search-alt search-icon"></i>
-                                        </div>
-                                    </div>
+                                    <form class="example" asp-action="Index" method="get">
+                                        <input type="text" placeholder="Nhập Từ Khoá.." name="s_name">
+                                        <button type="submit"><i class="fa fa-search"></i></button>
+                                    </form>
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="text-sm-right">
@@ -45,95 +43,95 @@
                                     </div>
                                 </div><!-- end col-->
                             </div>
-
                             <div class="table-responsive">
-                                <table class="table table-centered table-nowrap">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th style="width: 20px;">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                    <label class="custom-control-label" for="customCheck1">&nbsp;</label>
-                                                </div>
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Name)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Description)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Picture)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Quantity)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Price)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Brand.Name)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Category.Name)
-                                            </th>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.Status)
-                                            </th>
-                                            <th>View Details</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                        <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                    <label class="custom-control-label" for="customCheck2">&nbsp;</label>
-                                                </div>
-                                            </td>
+                                
+                                    <table class="table table-centered table-nowrap">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th style="width: 20px;">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Name)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Description)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Picture)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Price)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.Status)
+                                                </th>
+                                                <th>Xem Sản Phẩm</th>
+                                                <th>Sửa</th>
+                                                <th>Xoá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="product_all">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                                            <label class="custom-control-label" for="customCheck2">&nbsp;</label>
+                                                        </div>
+                                                    </td>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Description)
-                                            </td>
-                                            <td>
-                                                <img src="~/image/product/@item.Picture" style="height:150px;width:200px" />
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Quantity)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Price)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Brand.Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Category.Name)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Status)
-                                            </td>
-                                            <td>
-                                                <!-- Button trigger modal -->
-                                                <a asp-action="Details" asp-route-id="@item.ProductID">
-                                                    View Details
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a asp-action="Edit" asp-route-id="@item.ProductID"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                <a asp-action="Delete" asp-route-id="@item.ProductID"><i class="mdi mdi-close font-size-18"></i></a>
-                                            </td>
-                                        </tr>}
-                                    </tbody>
-                                </table>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Description)
+                                                    </td>
+                                                    <td>
+                                                        <img src="~/image/product/@item.Picture" style="height:50px;width:50px" />
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Price)
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-warning" name="btn_update_stt" data-id="@item.ProductID"
+                                                                data-stt="@(item.Status==true?0:1)" data-name="@item.Name">
+                                                            @{
+                                                                if (item.Status == true)
+                                                                {
+                                                                    @:Ẩn
+                                                                }
+                                                                else
+                                                                {
+                                                                    @:Hiện
+                                                                }
+                                                            }
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-warning">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-primary">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+
+                                                    </td>
+                                                    <td>
+                                                        <button  name="delete" class="btn btn-danger" data-id="@item.ProductID"><i class="fa fa-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -143,3 +141,45 @@
     <!-- End Page-content -->
     <!-- Modal -->
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('button[name=btn_update_stt]').click(function () {
+            var id = $(this).attr('data-id');
+            var stt = ($(this).attr('data-stt') == 0 ? false : true);
+            $.ajax({
+                method: "PUT",
+                url: "../api/Product_API/PutProductModel/" + id,
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify({ "id": id, "status": stt })
+            })
+                .done(function (msg) {
+                    if (msg == '0') {
+                        $.notify("Warning: Cập Nhật thất bại", "warn");
+                    }
+                    else {
+                        var r = JSON.parse(msg)
+                        if (r.stt =='True') {
+                            $('button[name=btn_update_stt][data-id=' + r.id + ']').html('Ẩn');
+
+                        }
+                        else {
+                            $('button[name=btn_update_stt][data-id=' + r.id + ']').html('Hiện');
+                        }
+                        $.notify("Cập Nhật Trạng Thái Thành Công", "success");
+                    }
+                });
+        })
+        $('button[name=delete]').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                method: "DELETE",
+                url: "../api/Product_API/DeleteProductModel/" + id,
+            })
+                .done(function (msg) {
+                    $("#product_all").load(window.location.href + " #product_all");
+                    $.notify("Xoá Sản Phẩm Thành Công", "success");
+                });
+        })
+    </script>
+}

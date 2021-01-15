@@ -34,7 +34,7 @@
                                     <td class="product_name">@item.Product.Name</td>
                                     <td class="product-price">@(String.Format("{0:n0}", item.Product.Price)) VND</td>
                                     <td class="product_quantity">@item.Amount</td>
-                                    <td class="product_total">@(item.Product.Price * item.Amount) VND</td>
+                                    <td class="product_total">@(String.Format("{0:n0}", item.Product.Price * item.Amount)) VND</td>
                                     <td class="product_delete"><button class="btn btn-danger btn remove-from-cart"><i class="fa fa-trash"></i></button></td>
                                     <td class="product_update"><button class="btn btn-danger btn update-cart"><i class="fa fa-refresh"></i></button></td>
                                 </tr>
@@ -44,7 +44,7 @@
                         </table>
                     </div>
                     <div class="cart_submit">
-                        <button type="submit">update cart</button>
+                        <button type="submit">Cập Nhật Giỏ Hàng</button>
                     </div>
                 </div>
             </div>
@@ -56,9 +56,9 @@
                     <div class="coupon_code">
                         <h3>Coupon</h3>
                         <div class="coupon_inner">
-                            <p>Enter your coupon code if you have one.</p>
+                            <p>Có Mã Giảm Giá ? Nhập tại đây ...</p>
                             <input placeholder="Coupon code" type="text">
-                            <button type="submit">Apply coupon</button>
+                            <button type="submit">Áp Dụng</button>
                         </div>
                     </div>
                 </div>
@@ -67,21 +67,21 @@
                         <h3>Cart Totals</h3>
                         <div class="coupon_inner">
                             <div class="cart_subtotal">
-                                <p>Subtotal</p>
-                                <p class="cart_amount">£</p>
+                                <p>Tổng Tiền Sản Phẩm</p>
+                                <p class="cart_amount">@(String.Format("{0:n0}", total)) VND</p>
                             </div>
                             <div class="cart_subtotal ">
-                                <p>Shipping</p>
-                                <p class="cart_amount"><span>Flat Rate:</span>@(String.Format("{0:n0}", total)) VND</p>
+                                <p>Phí Giao Hàng</p>
+                                <p class="cart_amount">@(String.Format("{0:n0}", 25000)) VND</p>
                             </div>
-                            <a href="#">Calculate shipping</a>
+                            <a href="#">Phí Ship</a>
 
                             <div class="cart_subtotal">
                                 <p>Total</p>
-                                <p class="cart_amount">@(String.Format("{0:n0}", total)) VND</p>
+                                <p class="cart_amount">@(String.Format("{0:n0}", total+25000)) VND</p>
                             </div>
                             <div class="text-center">
-                                <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Check out now!</a>
+                                <a class="my-1 btn btn-success btn-block" asp-controller="Order" asp-action="Checkout">Tiến Hành Thanh Toán</a>
                             </div>
                         </div>
                     </div>

@@ -26,7 +26,34 @@ namespace e_Commerce.Areas.Customer.Controllers
             var products = await _db.Products.Include(s => s.Category).ToListAsync();
             return View(products);
         }
+        public async Task<IActionResult> ShopList(string?category)
+        {
+            ProductModel product = null;
+            if(category!=null)
+            {
 
+            }
+            
+            return View();
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productModel = await _db.Products
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.ProductID == id);
+            if (productModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(productModel);
+        }
         public void AddToCart(ProductModel product,UserModel user)
         {
             var shoppingCartItem =

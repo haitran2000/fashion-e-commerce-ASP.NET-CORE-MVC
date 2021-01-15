@@ -5,9 +5,18 @@
             <div><vc:category-list /></div>
         </div>
         <div class="col-lg-9 col-md-12">
-            @await Component.InvokeAsync("Product")
+            <div class="new_product_area">
+                <div class="block_title">
+                    <h3>Sản Phẩm Mới</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @await Component.InvokeAsync("Product")
+                    </div>
+                </div>
+            </div>
             @await Html.PartialAsync("_BannerRightBottom.cshtml")
             @await Component.InvokeAsync("Brand")
         </div>
-    </div>
-</div>
+                </div>
+            </div>

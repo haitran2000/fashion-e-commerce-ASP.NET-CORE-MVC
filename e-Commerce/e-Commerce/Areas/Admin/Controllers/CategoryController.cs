@@ -50,6 +50,7 @@ namespace e_Commerce.Areas.Admin.Controllers
             {
                 _context.Add(categoryModel);
                 await _context.SaveChangesAsync();
+                
             }
             return View("Index");
         }

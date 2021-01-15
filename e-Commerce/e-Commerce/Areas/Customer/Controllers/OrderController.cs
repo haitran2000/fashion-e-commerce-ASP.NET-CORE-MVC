@@ -20,29 +20,15 @@ namespace e_Commerce.Areas.Customer.Controllers
         {
             _context = context;
         }
-        public IActionResult Checkout()
-        {
-            return View();
-        }
-        public decimal Total()
-        {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var total = _context.ShoppingCarts.Where(c => c.UserID == userId)
-                .Select(c => c.Product.Price * c.Amount).Sum();
-            return total;
-        }
         public void CheckoutCart(OrderModel order)
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var listCart = _context.ShoppingCarts.Where(s => s.UserID == userId).ToList();
-            order = new OrderModel
-            {
-                UserID = userId,
-                PaymentID = 1,
-                TotalMoney = Total(),
-                Date = DateTime.Now,
-                Status = true,
-            };
+            order.Date = DateTime.Now;
+            order.UserID = userId;
+            order.PaymentID = 1;
+            order.TotalMoney = Total();
+            order.Status = true;
             order.OrderDetails = new List<OrderDetailModel>();
             foreach (var cart in listCart)
             {
@@ -69,6 +55,12 @@ namespace e_Commerce.Areas.Customer.Controllers
 
             _context.SaveChanges();
         }
+        public IActionResult Checkout()
+        {
+            ViewBag.Total = Total();
+            
+            return View();
+        }
         [HttpPost]
         public IActionResult Checkout(OrderModel order)
         {
@@ -79,21 +71,28 @@ namespace e_Commerce.Areas.Customer.Controllers
 
             if (CartItem.Count == 0)
             {
-                ModelState.AddModelError("", "Your cart is empty, add some pies first");
+                ModelState.AddModelError("", "Giỏ Hàng Trống");
             }
 
             else
             {
+                ViewBag.Total = Total();
                 CheckoutCart(order);
-                ClearCart()
+                ClearCart();
                 return RedirectToAction("CheckoutComplete");
             }
             return View(order);
         }
         public IActionResult CheckoutComplete()
         {
-            ViewBag.CheckoutCompleteMessage = "Thanks for your order. You'll soon enjoy our delicious pies!";
             return View();
+        }
+        public decimal Total()
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var total = _context.ShoppingCarts.Where(c => c.UserID == userId)
+                .Select(c => c.Product.Price * c.Amount).Sum();
+            return total;
         }
     }
 }

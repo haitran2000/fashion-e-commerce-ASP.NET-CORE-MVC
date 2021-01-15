@@ -9,9 +9,10 @@
 <h4>ProductModel</h4>
 <hr />
 <div class="main-content">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <hiden></hiden>
             <div class="form-group">
                 <label asp-for="Products.Name" class="control-label"></label>
                 <input asp-for="Products.Name" class="form-control" />
@@ -72,16 +73,16 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        function readURL(input, idImg) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+<script>
+    function readURL(input, idImg) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $(idImg).attr('src', e.target.result);
-                }
+            reader.onload = function (e) {
+                $(idImg).attr('src', e.target.result);
+            }
 
-                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
             }
         }
         $("#ful").change(function () {
@@ -93,6 +94,6 @@
             .catch(error => {
                 console.error(error);
             });
-    </script>
+</script>
    
 }

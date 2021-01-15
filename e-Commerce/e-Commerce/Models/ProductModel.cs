@@ -33,7 +33,6 @@ namespace e_Commerce.Models
         public int CategoryID { get; set; }
         [ForeignKey("CategoryID")]
         public virtual CategoryModel Category { get; set; }
-        [StringLength(100)]
         [Display(Name = "Trạng Thái")]
         public bool Status { get; set; }
     }
