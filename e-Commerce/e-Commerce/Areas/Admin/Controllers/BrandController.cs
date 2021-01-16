@@ -72,7 +72,7 @@ namespace e_Commerce.Areas.Admin.Controllers
                     await ful.CopyToAsync(stream);
                 }
                 brandModel.Picture = brandModel.BrandID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
-                _context.Add(brandModel);
+                _context.Update(brandModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

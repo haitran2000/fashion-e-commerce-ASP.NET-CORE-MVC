@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using e_Commerce.Data;
 using e_Commerce.Models;
-using e_Commerce.Areas.Admin.ViewModel;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 
@@ -56,31 +55,30 @@ namespace e_Commerce.Areas.Admin.Controllers
         }
 
         // GET: Admin/Product/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            ProductViewModel productView = new ProductViewModel();
-            productView.BrandList = await _context.Brands.ToListAsync();
-            productView.CategoryList = await _context.Categories.ToListAsync();
-            return View(productView);
+            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "Name");
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name");
+            return View();
         }
-
+        
         // POST: Admin/Product/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProductViewModel productModel, IFormFile ful)
+        public async Task<IActionResult> Create([Bind("ProductID,Name,Description,Picture,Quantity,Price,Content,BrandID,CategoryID,Status")] ProductModel productModel, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(productModel.Products);
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/product", productModel.Products.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                _context.Add(productModel);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/product", productModel.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await ful.CopyToAsync(stream);
                 }
-                productModel.Products.Picture = productModel.Products.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
-                _context.Add(productModel.Products);
+                productModel.Picture = productModel.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                _context.Add(productModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -100,8 +98,8 @@ namespace e_Commerce.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "BrandID", productModel.BrandID);
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", productModel.CategoryID);
+            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "Name");
+            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "Name");
             return View(productModel);
         }
 
@@ -110,7 +108,7 @@ namespace e_Commerce.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Description,Picture,Quantity,Price,Content,BrandID,CategoryID,Status")] ProductModel productModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Description,Picture,Quantity,Price,Content,BrandID,CategoryID,Status")] ProductModel productModel, IFormFile ful)
         {
             if (id != productModel.ProductID)
             {
@@ -121,6 +119,13 @@ namespace e_Commerce.Areas.Admin.Controllers
             {
                 try
                 {
+                    _context.Update(productModel);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/product", productModel.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    productModel.Picture = productModel.ProductID + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                     _context.Update(productModel);
                     await _context.SaveChangesAsync();
                 }
@@ -137,8 +142,7 @@ namespace e_Commerce.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BrandID"] = new SelectList(_context.Brands, "BrandID", "BrandID", productModel.BrandID);
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", productModel.CategoryID);
+            
             return View(productModel);
         }
 

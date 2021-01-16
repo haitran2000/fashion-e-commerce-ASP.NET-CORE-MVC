@@ -3,6 +3,7 @@ using e_Commerce.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,20 +22,36 @@ namespace e_Commerce.Areas.Customer.Controllers
         {
             _db = db;
         }
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            if(Request.QueryString.Value.IndexOf("s_name")<0)
+            {
+                ViewBag.ListProduct = _db.Products.ToList();
+            }
+            base.OnActionExecuted(context);
+        }
         public async Task<IActionResult> Index()
         {
             var products = await _db.Products.Include(s => s.Category).ToListAsync();
             return View(products);
         }
-        public async Task<IActionResult> ShopList(string?category)
+        public async Task<IActionResult> ShopList(string?s_name,int loai_sp)
         {
             ProductModel product = null;
-            if(category!=null)
+            if(s_name!=null&&loai_sp==null)
             {
-
+                    ViewBag.ListProduct = (from p in _db.Products where p.Name.Contains(s_name) orderby p.CategoryID descending select p).ToList();             
+            }
+            if (s_name == null && loai_sp != null)
+            {
+                    ViewBag.ListProduct = (from p in _db.Products where p.CategoryID == loai_sp orderby p.CategoryID descending select p).ToList();
+            }
+            else
+            {
+                ViewBag.ListProduct= (from p in _db.Products select p).ToList();
             }
             
-            return View();
+            return View(product);
         }
         public async Task<IActionResult> Details(int? id)
         {

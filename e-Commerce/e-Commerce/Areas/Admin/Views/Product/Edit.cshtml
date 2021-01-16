@@ -12,7 +12,7 @@
     <h4>Loại Sản Phẩm</h4>
     <hr />
     <div class="col-md-12">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProductID" />
             <div class="form-group">
@@ -25,10 +25,12 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="ful" name="ful">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
             <div class="form-group">
-                <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" class="form-control" />
-                <span asp-validation-for="Picture" class="text-danger"></span>
+                <img id="HinhAnh" src="~/image/no_image.png" alt="no img" class="img-thumbnail" />
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
@@ -42,7 +44,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <textarea asp-for="Content" class="form-control" id="editor"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -69,9 +71,24 @@
         </div>
     </div>
 </div>
-
-
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function readURL(input, idImg) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(idImg).attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#ful").change(function () {
+            readURL(this, "#HinhAnh");
+        });
+    </script>
 }
+

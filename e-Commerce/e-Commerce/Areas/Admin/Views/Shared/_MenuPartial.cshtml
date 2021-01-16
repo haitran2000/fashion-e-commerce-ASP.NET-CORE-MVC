@@ -20,53 +20,31 @@
                         <i class="bx bx-store"></i>
                         <span>Quản Lý</span>
                     </a>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-store"></i>
+                        <span>Quản Lý</span>
+                    </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ecommerce-products.html">Products</a></li>
-                        <li><a href="ecommerce-product-detail.html">Product Detail</a></li>
-                        <li><a href="ecommerce-orders.html">Orders</a></li>
-                        <li><a href="ecommerce-customers.html">Customers</a></li>
-                        <li><a href="ecommerce-cart.html">Cart</a></li>
-                        <li><a href="ecommerce-checkout.html">Checkout</a></li>
-                        <li><a href="ecommerce-shops.html">Shops</a></li>
-                        <li><a href="ecommerce-add-product.html">Add Product</a></li>
+                        <li><a asp-action="Index" asp-controller="Product">Sản Phẩm</a></li>
+                        <li><a asp-action="Index" asp-controller="Product">Loại Sản Phẩm </a></li>
+                        <li><a asp-action="Index" asp-controller="Product">Nhãn Hiệu</a></li>
+                        <li><a asp-action="Index" asp-controller="Product">Khách Hàng</a></li>
+                        <li><a asp-action="Index" asp-controller="Product">Phương Thức Thanh Toán</a></li>
+                        <li><a asp-action="Create" asp-controller="Product">Thêm Sản Phẩm Mới</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxs-user-detail"></i>
-                        <span>Liên Hệ</span>
+                        <span>Đơn Hàng</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="contacts-grid.html">User Grid</a></li>
+                        <li><a asp-action="Index" asp-controller="Order">Tất cả đơn hàng</a></li>
                     </ul>
                 </li>
 
-                <li class="menu-title">Pages</li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-user-circle"></i>
-                        <span>Tài Khoản</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="auth-login.html">Đăng Nhập</a></li>
-                        <li><a href="auth-register.html">Đăng Ký</a></li>
-                        <li><a href="auth-recoverpw.html">Khôi Phục Mật Khẩu</a></li>
-                        <li><a href="auth-lock-screen.html">Khoá</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-list-ul"></i>
-                        <span>Bảng</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tables-basic.html">Basic Tables</a></li>
-                        <li><a href="tables-datatable.html">Data Tables</a></li>
-                        <li><a href="tables-responsive.html">Responsive Table</a></li>
-                        <li><a href="tables-editable.html">Editable Table</a></li>
-                    </ul>
-                </li>
             </ul>
         </div>
         <!-- Sidebar -->

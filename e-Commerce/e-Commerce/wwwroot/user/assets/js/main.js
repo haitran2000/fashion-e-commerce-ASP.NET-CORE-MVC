@@ -3,6 +3,7 @@
     
     /*----------------------------
        stickey menu
+
     ----------------------------*/
     $(window).on('scroll',function() {    
            var scroll = $(window).scrollTop();

@@ -4,9 +4,8 @@
     <ul>
         @foreach (var m in Model)
         {
-            <li class="has-sub">
-                <a href="#"><i class="fa fa-caret-right"></i>@m.Name.</a>
-            </li>
+
+                <a  class="fa fa-caret-right" asp-action="ShopList" asp-controller="Home" asp-route-id="@m.CategoryID" asp-area="Customer"><h5>@m.Name</h5></a>
         }
     </ul>
 </div>

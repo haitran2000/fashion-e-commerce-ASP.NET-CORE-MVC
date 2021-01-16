@@ -1,4 +1,4 @@
-using e_Commerce.Data;
+﻿using e_Commerce.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,11 +44,15 @@ namespace e_Commerce
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
             });
-            services.AddAuthentication().AddFacebook(facebookOptions =>
-            {
-                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
+            services.AddAuthentication()
+            .AddFacebook(facebookOptions => {
+                 // Đọc cấu hình
+                 IConfigurationSection facebookAuthNSection = Configuration.GetSection("Authentication:Facebook");
+                 facebookOptions.AppId = facebookAuthNSection["AppId"];
+                 facebookOptions.AppSecret = facebookAuthNSection["AppSecret"];
+                 // Thiết lập đường dẫn Facebook chuyển hướng đến
+                 facebookOptions.CallbackPath = "/dangnhapfb";
+             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
